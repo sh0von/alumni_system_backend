@@ -1,0 +1,109 @@
+{
+  "alumni": [
+    {
+      "alumni_id": 1,
+      "first_name": "John",
+      "last_name": "Doe",
+      "phone": "123-456-7890",
+      "email": "john.doe@example.com",
+      "address": "123 Main St, Anytown",
+      "batch": "2020",
+      "linkedin_url": "https://www.linkedin.com/in/johndoe",
+      "facebook_url": "https://www.facebook.com/johndoe",
+      "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "date_of_birth": "1990-01-01",
+      "now_working_on": "Software Engineer",
+      "username": "johndoe",
+      "password_hash": "$2b$10$ofqSRgbRb2k7qXG7LpyoueDcvjJ2MX9aAgEzYVWYf.A3W6hTCi/V.",
+      "approval": true
+    },
+    {
+      "alumni_id": 2,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "username": "john.doe",
+      "password_hash": "$2b$10$zFCgarKQV3d2rhy6NBw.Bej4bcXrfFRNsR8xhJWuJrHl47nXpONcW",
+      "approval": false,
+      "batch": "221"
+    },
+    {
+      "alumni_id": 3,
+      "first_name": "John",
+      "last_name": "aa",
+      "email": "john.doe@example.com",
+      "username": "john.aa",
+      "password_hash": "$2b$10$T35uu5Bnr1UKRDPpIUsRC.EAS1o7ALY5vZ.bzSR25yefAqFPas93G",
+      "phone": "",
+      "address": "",
+      "batch": "222",
+      "linkedin_url": "",
+      "facebook_url": "aa",
+      "bio": "aa",
+      "date_of_birth": "",
+      "now_working_on": "",
+      "approval": false
+    },
+    {
+      "alumni_id": 4,
+      "first_name": "a",
+      "last_name": "a",
+      "email": "alice@example.com",
+      "username": "a.a",
+      "password_hash": "$2b$10$k/r1L84z9aOczs95235yKObiygouxmBxcutWrTfTBJaTYk8/CWTAe",
+      "phone": "",
+      "address": "",
+      "batch": "",
+      "linkedin_url": "",
+      "facebook_url": "",
+      "bio": "",
+      "date_of_birth": "",
+      "now_working_on": "",
+      "approval": false
+    }
+  ],
+  "messages": [
+    {
+      "message_id": 1,
+      "sender_id": 2,
+      "recipient_id": 2,
+      "message_content": "Hello, how are you?",
+      "timestamp": "2024-03-04T11:25:10.365Z"
+    }
+  ],
+  "posts": [
+    {
+      "post_id": 6,
+      "author_id": 2,
+      "content": "Hello, alumni!",
+      "reactions": [
+        2
+      ]
+    },
+    {
+      "post_id": 5,
+      "author_id": 2,
+      "content": "Hello, alumni!",
+      "reactions": []
+    },
+    {
+      "post_id": 4,
+      "author_id": 2,
+      "content": "Hello hello hello  alumni!",
+      "reactions": []
+    },
+    {
+      "post_id": 2,
+      "author_id": 2,
+      "content": "Just graduated! 🎓 #classof2024",
+      "reactions": []
+    },
+    {
+      "post_id": 3,
+      "author_id": 1,
+      "content": "Happy to join the alumni network!",
+      "reactions": []
+    }
+  ],
+  "users": []
+}
