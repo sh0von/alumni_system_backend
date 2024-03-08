@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+  <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f7f7f7;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333333;
+      }
+      
+      .endpoint {
+        margin-bottom: 40px;
+        border-bottom: 1px solid #dddddd;
+        padding-bottom: 30px;
+      }
+      
+      .endpoint h2 {
+        margin-bottom: 15px;
+        color: #007bff;
+      }
+      
+      .method {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555555;
+      }
+      
+      .description {
+        margin-bottom: 15px;
+        color: #666666;
+      }
+      
+      .code {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      
+      pre {
+        margin: 0;
+      }
+      
+      .response {
+        margin-top: 20px;
+      }
+      
+      .code pre {
+        white-space: pre-wrap;
+      }
+      
+      .code pre,
+      .method,
+      .description {
+        font-size: 16px;
+      }
+      
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>API Documentation</h1>
+
+
+    <!-- Signup -->
+    <div class="endpoint">
+        <h2>1. Signup</h2>
+        <p class="description">Registers a new alumni user.</p>
+        <p class="method">Method: <span class="method">POST</span></p>
+        <div class="code">
+          <p>URL: /signup</p>
+          <p>Request Body:</p>
+          <pre>
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "username": "johndoe",
+    "email": "johndoe@example.com",
+    "password": "password123"
+  }
+          </pre>
+          <p>Response:</p>
+          <pre>
+  {
+    "message": "Alumni registered successfully"
+  }
+          </pre>
+        </div>
+      </div>
+  
+      <!-- Login -->
+      <div class="endpoint">
+        <h2>2. Login</h2>
+        <p class="description">Logs in an existing alumni user.</p>
+        <p class="method">Method: <span class="method">POST</span></p>
+        <div class="code">
+          <p>URL: /login</p>
+          <p>Request Body:</p>
+          <pre>
+  {
+    "username": "johndoe",
+    "password": "password123"
+  }
+          </pre>
+          <p>Response:</p>
+          <pre>
+  {
+    "message": "Login successful",
+    "token": "<JWT_TOKEN>"
+  }
+          </pre>
+        </div>
+      </div>
+  
+      <!-- Update Profile -->
+      <div class="endpoint">
+        <h2>3. Update Profile</h2>
+        <p class="description">Updates the profile of the authenticated user.</p>
+        <p class="method">Method: <span class="method">PUT</span></p>
+        <div class="code">
+          <p>URL: /profile</p>
+          <p>Request Header:</p>
+          <pre>
+  {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+          </pre>
+          <p>Request Body:</p>
+          <pre>
+  {
+    // Fields to be updated
+  }
+          </pre>
+          <p>Response:</p>
+          <pre>
+  {
+    "message": "Profile updated successfully",
+    "user": { /* Updated user profile object */ }
+  }
+          </pre>
+        </div>
+      </div>
+  
+      <!-- Logout -->
+      <div class="endpoint">
+        <h2>4. Logout</h2>
+        <p class="description">Logs out the authenticated user.</p>
+        <p class="method">Method: <span class="method">POST</span></p>
+        <div class="code">
+          <p>URL: /logout</p>
+          <p>Request Header:</p>
+          <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+          </pre>
+          <p>Response:</p>
+          <pre>
+  {
+    "message": "Logout successful"
+  }
+          </pre>
+        </div>
+      </div>
+  
+      <!-- Get Profile -->
+      <div class="endpoint">
+        <h2>5. Get Profile</h2>
+        <p class="description">Retrieves the profile of the authenticated user.</p>
+        <p class="method">Method: <span class="method">GET</span></p>
+        <div class="code">
+          <p>URL: /profile</p>
+          <p>Request Header:</p>
+          <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+          </pre>
+          <p>Response:</p>
+          <pre>
+  {
+    // User profile object
+  }
+          </pre>
+        </div>
+      </div>
+
+<!-- Create Message -->
+<div class="endpoint">
+    <h2>6. Create Message</h2>
+    <p class="description">Sends a message from one alumni to another.</p>
+    <p class="method">Method: <span class="method">POST</span></p>
+    <div class="code">
+      <p>URL: /messages</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Request Body:</p>
+      <pre>
+  {
+    "recipient_id": "<RECIPIENT_USER_ID>",
+    "message_content": "Hello, how are you?"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  {
+    "message": "Message sent successfully",
+    "message": { /* New message object */ }
+  }
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Retrieve Messages -->
+  <div class="endpoint">
+    <h2>7. Retrieve Messages</h2>
+    <p class="description">Retrieves messages received by the authenticated user.</p>
+    <p class="method">Method: <span class="method">GET</span></p>
+    <div class="code">
+      <p>URL: /messages</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  [
+    { /* Message object 1 */ },
+    { /* Message object 2 */ },
+    ...
+  ]
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Create Post -->
+  <div class="endpoint">
+    <h2>8. Create Post</h2>
+    <p class="description">Creates a new post by the authenticated user.</p>
+    <p class="method">Method: <span class="method">POST</span></p>
+    <div class="code">
+      <p>URL: /posts</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Request Body:</p>
+      <pre>
+  {
+    "content": "This is a new post."
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  {
+    "message": "Post created successfully",
+    "post": { /* New post object */ }
+  }
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Get Posts -->
+  <div class="endpoint">
+    <h2>9. Get Posts</h2>
+    <p class="description">Retrieves all posts with like status and count.</p>
+    <p class="method">Method: <span class="method">GET</span></p>
+    <div class="code">
+      <p>URL: /posts</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  [
+    { /* Post object 1 with like status and count */ },
+    { /* Post object 2 with like status and count */ },
+    ...
+  ]
+      </pre>
+    </div>
+  </div>
+  
+  <!-- React to Post -->
+  <div class="endpoint">
+    <h2>10. React to Post</h2>
+    <p class="description">Adds or removes a reaction to a post.</p>
+    <p class="method">Method: <span class="method">POST</span></p>
+    <div class="code">
+      <p>URL: /posts/:postId/react</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Request Body:</p>
+      <pre>
+  {
+    "reaction": "like"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  {
+    "message": "Reaction updated successfully",
+    "post": { /* Updated post object */ }
+  }
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Get Individual Post -->
+  <div class="endpoint">
+    <h2>11. Get Individual Post</h2>
+    <p class="description">Retrieves details of a specific post.</p>
+    <p class="method">Method: <span class="method">GET</span></p>
+    <div class="code">
+      <p>URL: /posts/:postId</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  {
+    // Individual post object with like status and count
+  }
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Edit Post -->
+  <div class="endpoint">
+    <h2>12. Edit Post</h2>
+    <p class="description">Edits the content of a post.</p>
+    <p class="method">Method: <span class="method">PUT</span></p>
+    <div class="code">
+      <p>URL: /posts/:postId</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Request Body:</p>
+      <pre>
+  {
+    "content": "Updated post content."
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  {
+    "message": "Post updated successfully",
+    "post": { /* Updated post object */ }
+  }
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Delete Post -->
+  <div class="endpoint">
+    <h2>13. Delete Post</h2>
+    <p class="description">Deletes a post.</p>
+    <p class="method">Method: <span class="method">DELETE</span></p>
+    <div class="code">
+      <p>URL: /posts/:postId</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  {
+    "message": "Post deleted successfully"
+  }
+      </pre>
+    </div>
+  </div>
+  
+  <!-- Search Posts -->
+  <div class="endpoint">
+    <h2>14. Search Posts</h2>
+    <p class="description">Searches for posts based on keyword, author, and batch.</p>
+    <p class="method">Method: <span class="method">GET</span></p>
+    <div class="code">
+      <p>URL: /search/post</p>
+      <p>Request Header:</p>
+      <pre>
+  {
+    "Authorization": "Bearer <JWT_TOKEN>"
+  }
+      </pre>
+      <p>Request Query Parameters:</p>
+      <pre>
+  {
+    "keyword": "<KEYWORD>",
+    "author": "<AUTHOR_USER_ID>",
+    "batch": "<BATCH>"
+  }
+      </pre>
+      <p>Response:</p>
+      <pre>
+  [
+    { /* Post object 1 */ },
+    { /* Post object 2 */ },
+    ...
+  ]
+      </pre>
+    </div>
+  </div>
+  
+  </div>
+</body>
+</html>

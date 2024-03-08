@@ -156,6 +156,34 @@ app.get('/profile/:username', authenticateToken, (req, res) => {
     res.json({ alumni_id: alumni.alumni_id, first_name: alumni.first_name, last_name: alumni.last_name, email: alumni.email, batch: alumni.batch, linkedin_url: alumni.linkedin_url, facebook_url: alumni.facebook_url, bio: alumni.bio, date_of_birth: alumni.date_of_birth, now_working_on: alumni.now_working_on });
   });
 
+    // Alumni directory route with search (requires authentication)
+app.get('/directory', authenticateToken, (req, res) => {
+  const { name, batch } = req.query;
+  let filteredAlumni = [...db.alumni];
+
+  // Filter alumni by name
+  if (name) {
+    const searchRegex = new RegExp(name, 'i');
+    filteredAlumni = filteredAlumni.filter(alumni => searchRegex.test(alumni.first_name) || searchRegex.test(alumni.last_name));
+  }
+
+  // Filter alumni by batch
+  if (batch) {
+    filteredAlumni = filteredAlumni.filter(alumni => alumni.batch === batch);
+  }
+
+  // Map filtered alumni profiles
+  const alumniProfiles = filteredAlumni.map(alumni => ({
+    alumni_id: alumni.alumni_id,
+    first_name: alumni.first_name,
+    last_name: alumni.last_name,
+    batch: alumni.batch,
+    now_working_on: alumni.now_working_on
+  }));
+
+  res.json(alumniProfiles);
+});
+
 // Send message route
 app.post('/messages', authenticateToken, (req, res) => {
     const { recipient_id, message_content } = req.body;
@@ -193,33 +221,6 @@ app.post('/messages', authenticateToken, (req, res) => {
     const receivedMessages = db.messages.filter(message => message.recipient_id === userId);
   
     res.json(receivedMessages);
-  });
-  // Alumni directory route with search (requires authentication)
-app.get('/directory', authenticateToken, (req, res) => {
-    const { name, batch } = req.query;
-    let filteredAlumni = [...db.alumni];
-  
-    // Filter alumni by name
-    if (name) {
-      const searchRegex = new RegExp(name, 'i');
-      filteredAlumni = filteredAlumni.filter(alumni => searchRegex.test(alumni.first_name) || searchRegex.test(alumni.last_name));
-    }
-  
-    // Filter alumni by batch
-    if (batch) {
-      filteredAlumni = filteredAlumni.filter(alumni => alumni.batch === batch);
-    }
-  
-    // Map filtered alumni profiles
-    const alumniProfiles = filteredAlumni.map(alumni => ({
-      alumni_id: alumni.alumni_id,
-      first_name: alumni.first_name,
-      last_name: alumni.last_name,
-      batch: alumni.batch,
-      now_working_on: alumni.now_working_on
-    }));
-  
-    res.json(alumniProfiles);
   });
 
 
@@ -259,7 +260,28 @@ app.get('/posts', authenticateToken, (req, res) => {
   
     res.json(postsWithLikes);
   });
+  // Get posts route
+app.get('/posts', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
   
+    // Retrieve posts from MongoDB
+    const posts = await Post.find();
+  
+    // Process posts to include like status and count
+    const postsWithLikes = posts.map(post => ({
+      ...post.toObject(),
+      isLiked: post.reactions.includes(userId),
+      likeCount: post.reactions.length
+    }));
+  
+    res.json(postsWithLikes);
+  } catch (error) {
+    console.error('Error retrieving posts:', error);
+    res.status(500).json({ message: 'Error retrieving posts' });
+  }
+});
+
   // React to post route
   app.post('/posts/:postId/react', authenticateToken, (req, res) => {
     const postId = parseInt(req.params.postId);
